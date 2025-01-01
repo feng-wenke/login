@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        /* 主题样式 */
+        
+        body.light-theme {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        body.dark-theme {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+        /* 导航栏样式 */
+        
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #e11f1f;
+        }
+        /* 欢迎信息样式 */
+        
+        .welcome-message {
+            text-align: center;
+            margin-top: 20px;
+        }
+        /* 页脚样式 */
+        
+        footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        /* 照片轮播样式 */
+        
+        .carousel {
+            position: relative;
+            max-width: 600px;
+            /* 根据需要调整大小 */
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        
+        .carousel-images img {
+            width: 100%;
+            display: none;
+            /* 默认不显示图片 */
+            transition: opacity 1s ease-in-out;
+            /* 平滑过渡效果 */
+        }
+        
+        .carousel-images img.active {
+            display: block;
+            /* 显示当前活动的图片 */
+        }
+        
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 100;
+        }
+        
+        .carousel-button.prev {
+            left: 10px;
+        }
+        
+        .carousel-button.next {
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body class="light-theme">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="logout.html">Logout</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="music.html">Music</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="welcome-message">
+        <h1>Welcome, User!</h1>
+        <p>Here is your personalized home page.</p>
+    </div>
+    <section class="content">
+        <!-- Your content goes here -->
+        <h2>Recent Activities</h2>
+        <!-- 照片轮播容器 -->
+        <div class="carousel">
+            <!-- 轮播图片 -->
+            <div class="carousel-images">
+                <img src="img/0.jpg" alt="Image 1">
+                <img src="img/1.jpg" alt="Image 2">
+                <img src="img/2.jpg" alt="Image 3">
+                <!-- 更多图片... -->
+            </div>
+            <!-- 轮播导航按钮 -->
+            <button class="carousel-button prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="carousel-button next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+
+        <p>Here are some of your recent activities...</p>
+    </section>
+    <footer>
+        <p>&copy; 2025 Your Company. All rights reserved.</p>
+    </footer>
+    <script>
+        // 页面加载时，从localStorage获取主题并应用
+        document.addEventListener('DOMContentLoaded', function() {
+            var savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.className = savedTheme + '-theme'; // 应用主题
+        });
+        // 照片轮播逻辑
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-images img');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide) => {
+                slide.classList.remove('active');
+            });
+            slides[index].classList.add('active');
+        }
+
+        function moveSlide(step) {
+            currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // 初始化轮播器，显示第一张图片
+        showSlide(currentSlide);
+
+        // 自动轮播
+        setInterval(() => {
+            moveSlide(1);
+        }, 3000); // 每3秒切换一次图片
+    </script>
+</body>
+
+</html>
