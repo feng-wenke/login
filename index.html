@@ -8,7 +8,7 @@
     <style>
         /* 基础样式 */
         
-        body {
+         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -17,15 +17,39 @@
             align-items: center;
             height: 100vh;
             transition: background-color 0.3s, color 0.3s;
-            /* 平滑过渡 */
         }
         
+        @keyframes glowing-border {
+            0% {
+                border-color: #008744;
+                box-shadow: 0 0 10px #008744;
+            }
+            25% {
+                border-color: #0057e7;
+                box-shadow: 0 0 10px #0057e7;
+            }
+            50% {
+                border-color: #d62d20;
+                box-shadow: 0 0 10px #d62d20;
+            }
+            75% {
+                border-color: #ffa700;
+                box-shadow: 0 0 10px #ffa700;
+            }
+            100% {
+                border-color: #008744;
+                box-shadow: 0 0 10px #008744;
+            }
+        }
+
         .login-container {
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             width: 300px;
+            border: 2px solid transparent; /* 设置透明边框以便应用动画 */
+            animation: glowing-border 2s infinite;
         }
         
         h2 {
