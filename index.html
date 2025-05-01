@@ -141,6 +141,13 @@
     </div>
 
     <script>
+        // 用户凭据对象，存储多个用户的用户名和密码
+        const users = {
+            '17674703818': '328249',
+            '13786413422': 'A12345678',
+            'user2': 'pass2',
+            // 可以添加更多用户
+        };
         // 页面加载时，从localStorage获取主题并应用
         document.addEventListener('DOMContentLoaded', function() {
             var savedTheme = localStorage.getItem('theme') || 'light';
@@ -151,11 +158,11 @@
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
 
-            // 这里可以添加验证逻辑，例如通过AJAX请求发送到服务器
-            if (username === "17674703818" && password === "328249") {
+            // 验证用户凭据
+            if (users[username] && users[username] === password) {
                 alert('Login successful!');
                 // 登录成功后的操作，比如跳转到主页
-                window.location.href = 'https://homepage.328249.xyz/';
+                window.location.href = 'settings.html';
             } else {
                 alert('Invalid username or password!');
             }
